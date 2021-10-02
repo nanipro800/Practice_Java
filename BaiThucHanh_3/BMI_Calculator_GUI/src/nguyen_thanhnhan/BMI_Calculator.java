@@ -85,26 +85,34 @@ public class BMI_Calculator extends Frame {
 			// TODO Auto-generated method stub
 			String strW = txtW.getText();
 			String strH = txtH.getText();
-			try {
+			try 
+			{
 				double W = Double.parseDouble(strW);
 				double H = Double.parseDouble(strH);
-				// Tính BMI
-				double BMI = W / (Math.pow(H, 2));
-				// Xuất kết quả
-				txtBMI.setText(String.valueOf("" + String.format("%.2f", BMI)));
-				// Phân loại dựa theo chỉ số BMI và đưa ra lời khuyên
-				if(BMI < 18.5) {
-					txtAdvances.setText(String.valueOf("Bạn bị gầy, bạn nên tăng cân"));
+				if(H <= 40 || W <= 0)
+				{
+					throw new Exception("Exception message");
 				}
-				else if(BMI >= 18.5 && BMI <= 24.9) {
-					txtAdvances.setText(String.valueOf("Bạn bình thường, chúc mừng bạn"));
+				else {
+					// Tính BMI
+					double BMI = W / (Math.pow(H/100, 2));
+					// Xuất kết quả
+					txtBMI.setText(String.valueOf("" + String.format("%.2f", BMI)));
+					// Phân loại dựa theo chỉ số BMI và đưa ra lời khuyên
+					if(BMI < 18.5) {
+						txtAdvances.setText(String.valueOf("Bạn bị gầy, bạn nên tăng cân"));
+					}
+					else if(BMI >= 18.5 && BMI <= 24.9) {
+						txtAdvances.setText(String.valueOf("Bạn bình thường, chúc mừng bạn"));
+					}
+					else if(BMI >= 25 && BMI <= 29.9) {
+						txtAdvances.setText(String.valueOf("Bạn bị thừa cân, bạn nên giảm cân"));
+					}
+					else if(BMI >= 30) {
+						txtAdvances.setText(String.valueOf("Bạn bị béo phì, bạn nên giảm cân"));
+					}
 				}
-				else if(BMI >= 25 && BMI <= 29.9) {
-					txtAdvances.setText(String.valueOf("Bạn bị thừa cân, bạn nên giảm cân"));
-				}
-				else if(BMI >= 30) {
-					txtAdvances.setText(String.valueOf("Bạn bị béo phì, bạn nên giảm cân"));
-				}
+				
 			}
 			catch (Exception ex) {
 				txtBMI.setText("Nhap Lai");
